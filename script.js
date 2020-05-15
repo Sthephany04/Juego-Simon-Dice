@@ -11,6 +11,7 @@ class Juego {
     this.siguienteNivel();
   }
   inicializar() {
+    this.elegirColor = this.elegirColor.bind(this); // bind para enlazar-atar
     btnEmpezar.classList.add("hide");
     this.nivel = 1;
     this.colores = {
@@ -27,6 +28,7 @@ class Juego {
   }
   siguienteNivel() {
     this.iluminarSecuencia();
+    this.agregarEventosClick();
   }
   transformarNumeroAColor(numero) {
     switch (numero) {
@@ -53,6 +55,16 @@ class Juego {
   }
   apagarColor(color) {
     this.colores[color].classList.remove("light");
+  }
+  agregarEventosClick() {
+  // se usa el metodo bind ya que this nos devolvera el target del boton tocado, y no del juego en si como deberia ser
+    this.colores.celeste.addEventListener('click', this.elegirColor);
+    this.colores.verde.addEventListener('click', this.elegirColor);
+    this.colores.violeta.addEventListener('click', this.elegirColor);
+    this.colores.naranja.addEventListener('click', this.elegirColor);
+  }
+  elegirColor(ev) {
+    console.log(this);
   }
 }
 
